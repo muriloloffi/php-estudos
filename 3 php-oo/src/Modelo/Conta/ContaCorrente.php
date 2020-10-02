@@ -1,0 +1,21 @@
+<?php
+
+namespace Licao\Banco\Modelo\Conta;
+
+class ContaCorrente extends Conta
+{
+    protected function percentualTarifa(): float
+    {
+        return 0.05;
+    }
+
+    public function transfere(float $valorATransferir, Conta $contaDestino)
+    {
+        if ($valorATransferir > $this->saldo) {
+            echo "Saldo indisponível";
+            return;
+        }
+        $this->sacar($valorATransferir);
+        $contaDestino->depositar($valorATransferir);
+    }
+}
