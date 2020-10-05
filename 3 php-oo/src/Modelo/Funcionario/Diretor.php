@@ -1,5 +1,7 @@
 <?php
 
+namespace Licao\Banco\Modelo\Funcionario;
+
 use Licao\Banco\Modelo\Funcionario\Funcionario;
 
 class Diretor extends Funcionario

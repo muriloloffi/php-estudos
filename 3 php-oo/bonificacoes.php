@@ -3,10 +3,10 @@
 require_once './autoload.php';
 
 use Licao\Banco\Modelo\Cpf;
-use Licao\Banco\Modelo\Funcionario\{Funcionario, Gerente};
+use Licao\Banco\Modelo\Funcionario\{Desenvolvedor, Diretor, Funcionario, Gerente};
 use Licao\Banco\Service\ControladorDeBonificacoes;
 
-$umFuncionario = new Funcionario(
+$umFuncionario = new Desenvolvedor(
     'Vinicius da S Dias',
     new Cpf('123.444.567-02'),
     'Desenvolvedor',
