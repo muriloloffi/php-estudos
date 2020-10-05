@@ -2,11 +2,12 @@
 
 namespace Licao\Banco\Modelo\Conta;
 
+use Licao\Banco\Modelo\Autenticavel;
 use Licao\Banco\Modelo\Pessoa;
 use Licao\Banco\Modelo\Cpf;
 use Licao\Banco\Modelo\Endereco;
 
-class Titular extends Pessoa
+class Titular extends Pessoa implements Autenticavel
 {
     private Endereco $endereco;
 
@@ -40,5 +41,9 @@ class Titular extends Pessoa
     public function recuperaEndereco(): Endereco
     {
         return $this->endereco;
+    }
+    public function podeAutenticar(string $senha): bool
+    {
+        return $senha === 'abcd';
     }
 }

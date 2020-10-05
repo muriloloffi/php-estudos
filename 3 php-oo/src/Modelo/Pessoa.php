@@ -4,6 +4,8 @@ namespace Licao\Banco\Modelo;
 
 class Pessoa
 {
+    use AcessoPropriedades;
+
     protected string $nome;
     private Cpf $cpf;
 
@@ -23,7 +25,7 @@ class Pessoa
     {
         return $this->cpf->recuperaCpf();
     }
-    protected function validaNome(string $nome): void
+    final protected function validaNome(string $nome): void
     {
         if (strlen($nome) < 5){
             echo "Nome precisa ter mais que 5 caracteres";

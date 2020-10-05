@@ -2,7 +2,7 @@
 
 namespace Licao\Banco\Modelo;
 
-class Cpf
+final class Cpf
 {
     private string $cpf;
     private static int $identidades = 0;

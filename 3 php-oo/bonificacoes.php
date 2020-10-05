@@ -9,21 +9,18 @@ use Licao\Banco\Service\ControladorDeBonificacoes;
 $umFuncionario = new Desenvolvedor(
     'Vinicius da S Dias',
     new Cpf('123.444.567-02'),
-    'Desenvolvedor',
     1000
 );
 
 $umaFuncionaria = new Gerente(
     'Patricia Correa',
     new Cpf('987.444.321-03'),
-    'Gerente',
     3000
 );
 
 $umDiretor = new Diretor(
     'Ana Paula', 
     new Cpf('666.666.666-66'),
-    'Diretor', 
     5000
 );
 

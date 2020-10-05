@@ -2,8 +2,19 @@
 
 namespace Licao\Banco\Modelo;
 
-class Endereco
+/**
+ * Class Endereco
+ * @package Alura\Banco\Modelo
+ * @property-read string $cidade
+ * @property-read string $bairro
+ * @property-read string $rua
+ * @property-read string $numero
+ */
+
+final class Endereco
 {
+    use AcessoPropriedades;
+
     private string $cidade;
     private string $bairro;
     private string $rua;
@@ -15,6 +26,11 @@ class Endereco
         $this->bairro = $bairro;
         $this->rua = $rua;
         $this->numero = $numero;
+    }
+
+    public function alteraRua($novaRua) : void
+    {
+        $this->rua = $novaRua;
     }
     
     public function recuperaCidade() : string
@@ -35,5 +51,16 @@ class Endereco
     public function recuperaNumero() : string
     {
         return $this->numero;
+    }
+
+    public function __toString(): string
+    {
+        return "{$this->rua}, {$this->numero}\n{$this->bairro}, {$this->cidade}";
+    }
+
+    public function __set(string $nomeAtributo, string $novoValor) : void
+    {
+        $metodo = 'altera' . ucfirst($nomeAtributo);
+        $this->$metodo($novoValor);
     }
 }
