@@ -3,6 +3,7 @@
 namespace Alura\Banco\Modelo\Conta;
 
 use Alura\Banco\Modelo\Conta\SaldoInsuficienteException;
+use InvalidArgumentException;
 
 abstract class Conta
 {
@@ -25,8 +26,14 @@ abstract class Conta
 
     public function saca(float $valorASacar): void
     {
+        if($valorASacar < 0){
+            $mensagem = "Saques somentes de valores maiores que zero." . PHP_EOL;
+            throw new InvalidArgumentException($mensagem);
+        }
+
         $tarifaSaque = $valorASacar * $this->percentualTarifa();
         $valorSaque = $valorASacar + $tarifaSaque;
+
         if ($valorSaque > $this->saldo) {
             throw new SaldoInsuficienteException($valorSaque, $this->saldo);
         }
@@ -37,8 +44,7 @@ abstract class Conta
     public function deposita(float $valorADepositar): void
     {
         if ($valorADepositar < 0) {
-            echo "Valor precisa ser positivo";
-            return;
+            throw new InvalidArgumentException();
         }
 
         $this->saldo += $valorADepositar;

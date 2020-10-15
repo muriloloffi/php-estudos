@@ -2,17 +2,18 @@
 
 namespace Alura\Banco\Modelo;
 
+use Alura\Banco\Modelo\Conta\NomeInvalidoException;
+
 abstract class Pessoa
 {
     use AcessoPropriedades;
 
-    protected $nome;
-    private $cpf;
+    protected string $nome;
+    private CPF $cpf;
 
     public function __construct(string $nome, CPF $cpf)
     {
-        $this->validaNome($nome);
-        $this->nome = $nome;
+        $this->defineNome($nome);
         $this->cpf = $cpf;
     }
 
@@ -26,11 +27,11 @@ abstract class Pessoa
         return $this->cpf->recuperaNumero();
     }
 
-    final protected function validaNome(string $nomeTitular)
+    final protected function defineNome(string $nomeTitular)
     {
         if (strlen($nomeTitular) < 5) {
-            echo "Nome precisa ter pelo menos 5 caracteres";
-            exit();
+            throw new NomeInvalidoException($nomeTitular);
         }
+        $this->nome = $nomeTitular;
     }
 }
