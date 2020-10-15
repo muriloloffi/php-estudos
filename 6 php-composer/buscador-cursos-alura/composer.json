@@ -1,0 +1,26 @@
+{
+    "name": "muriloloffi/buscador-cursos",
+    "description": "Projeto que busca os cursos no site da Alura para fins de aprendizado;",
+    "type": "library",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Murilo Loffi",
+            "email": "muriloloffi@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.2",
+        "symfony/dom-crawler": "^4.4",
+        "symfony/css-selector": "^5.1"
+    },
+    "_comment": ["testando comentário"],
+    "autoload": {
+        "files": [
+            "./functions.php"
+        ],
+        "psr-4": {
+            "Muriloloffi\\BuscadorDeCursos\\": "./src"
+        }
+    }
+}
