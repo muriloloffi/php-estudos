@@ -2,10 +2,12 @@
 
 namespace Muriloloffi\Doctrine\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * @Entity
  */
-
 class Student
 {
     /**
@@ -13,16 +15,29 @@ class Student
      * @GeneratedValue
      * @Column(type="integer")
      */
-    private $studentId;
+    private int $id;
+
     /**
      * @Column(type="string")
      */
-    private $studentName;
+    private string $studentName;
+
+    /**
+     * @OneToMany(targetEntity="Phone", mappedBy="Student")
+     */
+    private $phones; //deixar sem tipo pois o tipo do objeto 
+                     //será definido depois
+
+
+    public function __construct()
+    {
+        $this->phones = new ArrayCollection();
+    }
 
 
     public function getId(): int
     {
-        return $this->studentId;
+        return $this->id;
     }
 
     public function getName(): string
@@ -35,4 +50,17 @@ class Student
         $this->studentName = $thisName;
         return $this;
     }
+    
+    public function addPhone(Phone $phone)
+    {
+        $this->phones->add($phone);
+        $phone->setStudent($this);
+        return $this;
+    }
+
+    public function getPhones(): Collection
+    {
+        return $this->phones;
+    }
+
 }
