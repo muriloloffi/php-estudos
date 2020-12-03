@@ -20,7 +20,8 @@ class Phone
     private string $phoneNumber;
 
     /**
-     * @ManyToOne(targetEntity="Student")
+     * @ManyToOne(targetEntity="Student", inversedBy="phones")
+     * @JoinColumn(name="student_id_FK", referencedColumnName="student_id")
      */
     private $student;
 

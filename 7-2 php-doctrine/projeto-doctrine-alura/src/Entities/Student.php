@@ -13,9 +13,9 @@ class Student
     /**
      * @Id
      * @GeneratedValue
-     * @Column(type="integer")
+     * @Column(type="integer", name="student_id")
      */
-    private int $id;
+    private int $studentId;
 
     /**
      * @Column(type="string")
@@ -23,10 +23,9 @@ class Student
     private string $studentName;
 
     /**
-     * @OneToMany(targetEntity="Phone", mappedBy="Student")
+     * @OneToMany(targetEntity="Phone", mappedBy="student", cascade={"remove", "persist"})
      */
-    private $phones; //deixar sem tipo pois o tipo do objeto 
-                     //será definido depois
+    private Collection $phones;
 
 
     public function __construct()
@@ -37,7 +36,7 @@ class Student
 
     public function getId(): int
     {
-        return $this->id;
+        return $this->studentId;
     }
 
     public function getName(): string
