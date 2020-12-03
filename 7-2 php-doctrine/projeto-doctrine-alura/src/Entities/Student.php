@@ -50,7 +50,7 @@ class Student
         return $this;
     }
     
-    public function addPhone(Phone $phone)
+    public function addPhone(Phone $phone): self
     {
         $this->phones->add($phone);
         $phone->setStudent($this);
