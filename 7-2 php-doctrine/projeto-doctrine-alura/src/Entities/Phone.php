@@ -23,7 +23,7 @@ class Phone
      * @ManyToOne(targetEntity="Student", inversedBy="phones")
      * @JoinColumn(name="student_id_FK", referencedColumnName="student_id")
      */
-    private $student;
+    private Student $student;
 
     public function getId(): int
     {
