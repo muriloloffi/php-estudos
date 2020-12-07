@@ -28,7 +28,11 @@ class Student
     private Collection $phones;
 
     /**
-     * @ManyToMany(targetEntity="Course", mappedBy="enrolledStudents")
+     * @ManyToMany(targetEntity="Course", inversedBy="enrolledStudents")
+     * @JoinTable(name="student_courseclass", 
+     *      joinColumns={@JoinColumn(name="student_id", referencedColumnName="student_id")},
+     *      inverseJoinColumns={@JoinColumn(name="group_id", referencedColumnName="course_id")}
+     *      )
      */
     private Collection $subjectsEnrolled;
 

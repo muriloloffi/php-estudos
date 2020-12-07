@@ -23,7 +23,7 @@ class Course
     private string $courseName;
 
     /**
-     * @ManyToMany(targetEntity="Student", inversedBy="subjectsEnrolled")
+     * @ManyToMany(targetEntity="Student", mappedBy="subjectsEnrolled")
      */
     private Collection $enrolledStudents;
 
