@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="Muriloloffi\Doctrine\Repository\StudentRepository")
  */
 class Student
 {
@@ -23,7 +23,7 @@ class Student
     private string $studentName;
 
     /**
-     * @OneToMany(targetEntity="Phone", mappedBy="student", cascade={"remove", "persist"})
+     * @OneToMany(targetEntity="Phone", mappedBy="student", cascade={"remove", "persist"}, fetch="EAGER")
      */
     private Collection $phones;
 
@@ -84,6 +84,9 @@ class Student
         return $this;
     }
 
+    /**
+     * @return Course[]
+     */
     public function getSubjectsEnrolled(): Collection
     {
         return $this->subjectsEnrolled;
