@@ -9,10 +9,12 @@ class StudentRepository extends EntityRepository
 {
     public function buscaCursosPorAluno()
     {
-        $studentClass = Student::class;
-        $entityManager = $this->getEntityManager();
-        $dql = "SELECT student, phones, courses FROM $studentClass student JOIN student.phones phones JOIN student.subjectsEnrolled courses";
-        $query = $entityManager->createQuery($dql);
+        $query = $this->createQueryBuilder('a')
+            ->join('a.phones', 't')
+            ->join('a.subjectsEnrolled', 'c')
+            ->addSelect('t')
+            ->addSelect('c')
+            ->getQuery();
 
         return $query->getResult();
     }
