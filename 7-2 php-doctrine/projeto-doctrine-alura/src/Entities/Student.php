@@ -5,6 +5,7 @@ namespace Muriloloffi\Doctrine\Entities;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+//Para usar o repository da classe, usar a anotação entre parênteses abaixo:
 /**
  * @Entity(repositoryClass="Muriloloffi\Doctrine\Repository\StudentRepository")
  */
