@@ -9,12 +9,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $entityManagerFactory = new EntityManagerFactory();
 $entityManager = $entityManagerFactory->getEntityManager();
 
-$studentRepository = $entityManager->getRepository(Student::class);
-
-/**
- * @var Student[] $studentList
- */
-$studentList = $studentRepository->findAll();
+$dql = "SELECT student FROM Muriloloffi\\Doctrine\\Entities\\Student student WHERE student.studentId = 1 OR student.studentName = 'Nico Steppat' ORDER BY student.studentName";
+$query = $entityManager->createQuery($dql);
+$studentList = $query->getResult();
 
 foreach ($studentList as $student) {
     $studentPhones = $student

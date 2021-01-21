@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="Muriloloffi\Doctrine\Repository\StudentRepository")
  */
 class Student
 {
@@ -23,14 +23,24 @@ class Student
     private string $studentName;
 
     /**
-     * @OneToMany(targetEntity="Phone", mappedBy="student", cascade={"remove", "persist"})
+     * @OneToMany(targetEntity="Phone", mappedBy="student", cascade={"remove", "persist"}, fetch="EAGER")
      */
     private Collection $phones;
+
+    /**
+     * @ManyToMany(targetEntity="Course", inversedBy="enrolledStudents")
+     * @JoinTable(name="student_courseclass", 
+     *      joinColumns={@JoinColumn(name="student_id", referencedColumnName="student_id")},
+     *      inverseJoinColumns={@JoinColumn(name="group_id", referencedColumnName="course_id")}
+     *      )
+     */
+    private Collection $subjectsEnrolled;
 
 
     public function __construct()
     {
         $this->phones = new ArrayCollection();
+        $this->subjectsEnrolled = new ArrayCollection();
     }
 
 
@@ -60,6 +70,26 @@ class Student
     public function getPhones(): Collection
     {
         return $this->phones;
+    }
+
+    public function enrollSubject(Course $course): self
+    {
+        if ($this->subjectsEnrolled->contains($course)){
+            return $this;
+        }
+
+        $this->subjectsEnrolled->add($course);
+        $course->enrollStudent($this);
+
+        return $this;
+    }
+
+    /**
+     * @return Course[]
+     */
+    public function getSubjectsEnrolled(): Collection
+    {
+        return $this->subjectsEnrolled;
     }
 
 }
